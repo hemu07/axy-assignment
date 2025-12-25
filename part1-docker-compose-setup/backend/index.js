@@ -25,6 +25,6 @@ app.get("/message", (req, res) => {
   res.json({ message: "Hello World" });
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`Backend running on port ${PORT}`);
 });
