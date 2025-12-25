@@ -16,6 +16,7 @@ RDS PostgreSQL (Multi-AZ) in private subnets
 AWS Secrets Manager for database credentials
 CloudWatch Logs for ECS container logging
 
+```
 Traffic flow:
 Internet
    ↓
@@ -24,6 +25,8 @@ Application Load Balancer (Public Subnet)
 ECS Fargate Service (Private Subnet)
    ↓
 RDS PostgreSQL (Private Subnet)
+```
+
 
 Terraform File Breakdown
 ```
