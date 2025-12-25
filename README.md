@@ -3,6 +3,7 @@
 #Part 1: Docker Compose Setup (40% of score)
 
 📋 Prerequisites & Installation
+
 This application is designed to run on a Linux-based system (AWS EC2 Amazon Linux 2 / Amazon Linux 2023)
 - Operating System
 Amazon Linux 2 / Amazon Linux 2023
@@ -132,6 +133,7 @@ docker compose down
 
 To remove volumes (will delete DB data):
 docker compose down -v
+
 
 
 
