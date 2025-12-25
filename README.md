@@ -1,25 +1,28 @@
 #Below is a local setup to test the application in local dev envrionmnet using Docker Compose
+_____________________________________________________________________________________________________________________________________________
 
 #Part 1: Docker Compose Setup (40% of score)
 
 #High level overview:
 
-PostgreSQL (with a persistent volume)
+- PostgreSQL (with a persistent volume)
+  Backend API (Node.js + Express) exposing:
+  
+  GET /healthcheck
 
-Backend API (Node.js + Express) exposing:
+  GET /message → returns "Hello World"
 
-GET /healthcheck
 
-GET /message → returns "Hello World"
+- Frontend (React) that:
+  
+  Calls /healthcheck
 
-Frontend (React) that:
+  Calls /message
+  
 
-Calls /healthcheck
+- Displays results in the browser
 
-Calls /message
-
-Displays results in the browser
-
+_____________________________________________________________________________________________________________________________________________
 
 📋 Prerequisites & Installation
 
@@ -30,7 +33,7 @@ Any Linux distribution that supports Docker
 
 - Docker Engine (Required)
   
-steps to install
+--> steps to install
 ```
 sudo yum update -y
 sudo yum install docker -y
@@ -39,12 +42,15 @@ sudo systemctl enable docker
 sudo usermod -aG docker ec2-user
 newgrp docker
 ```
-Verify installation
+Verify installation:
 ```
 docker --version
 ```
 
 - Docker Compose v2 Plugin (Required)
+  Why Docker compose?
+     - For local env, we can use docker compose which helps run multiple containers as microservices and all are within one default private network created by docker compose
+       
 Docker Compose v2 is installed as a Docker CLI plugin
 ```
 mkdir -p ~/.docker/cli-plugins
@@ -54,10 +60,11 @@ curl -SL https://github.com/docker/compose/releases/download/v2.27.0/docker-comp
 
 chmod +x ~/.docker/cli-plugins/docker-compose
 ```
-Verify installation
+Verify installation:
 ```
 docker compose version
 ```
+
 
 - Network / Firewall Requirements
 
@@ -70,11 +77,7 @@ Port	Purpose
 
 <img width="1505" height="81" alt="image" src="https://github.com/user-attachments/assets/61fe58ec-ecbf-4441-8ad3-db6cd862a497" />
 
-
-Why Docker compose?
-
-For local env, we can use docker compose which helps run multiple containers as microservices and all are within one default private network created by docker compose
-
+_____________________________________________________________________________________________________________________________________________
 
 #Database setup (postgres SQL DB)
 
@@ -85,6 +88,7 @@ this way even if container dies, data is persisted on host machine and can be re
 
 <img width="771" height="213" alt="image" src="https://github.com/user-attachments/assets/46b71c10-f9d3-4737-82b4-203829c0f060" />
 
+_____________________________________________________________________________________________________________________________________________
 
 #Backend setup (Node.js + Express)
 I have configured below two paths:
@@ -99,6 +103,7 @@ backend container is only accessible from frontend container, as i havent config
 
 <img width="1898" height="302" alt="image" src="https://github.com/user-attachments/assets/4fbaae00-ba76-4758-94b2-58692912cd5e" />
 
+_____________________________________________________________________________________________________________________________________________
 
 #Frontend setup (React)
 i have configured frontned to call backend for below two paths
@@ -113,6 +118,7 @@ ok
 Hello World
 ```
 
+_____________________________________________________________________________________________________________________________________________
 
 1️⃣ All Services Communicate Over a Private Docker Network
 
@@ -165,6 +171,7 @@ To remove volumes (will delete DB data):
 docker compose down -v
 ```
 
+_____________________________________________________________________________________________________________________________________________
 
 Key Design Decisions
 1. Service Networking
@@ -182,6 +189,7 @@ Same pattern works in AWS (via ECS task definitions / Secrets Manager).
 4. Independent Builds
 Frontend and backend have their own Dockerfile
 Mirrors how services are deployed independently in production.
+
 
 
 
