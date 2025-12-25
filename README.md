@@ -43,12 +43,11 @@ docker compose version
 - Network / Firewall Requirements
 
 Ensure the following inbound ports are allowed on the host (EC2 Security Group):
-
+```
 Port	Purpose
-
 8080	Frontend web application
-
 22	SSH access
+```
 
 <img width="1505" height="81" alt="image" src="https://github.com/user-attachments/assets/61fe58ec-ecbf-4441-8ad3-db6cd862a497" />
 
@@ -111,14 +110,18 @@ Hello World
 1️⃣ All Services Communicate Over a Private Docker Network
 
 Docker Compose automatically creates a private bridge network (e.g. axy_default)
+
 All services (frontend, backend, db) are attached to this network
 
 <img width="898" height="333" alt="image" src="https://github.com/user-attachments/assets/3de42fcd-e3f9-4190-b839-87093c79b8e5" />
 
 And containers communicate using service names:
+```
 Service	Hostname used
 Backend → DB	      db
 Frontend → Backend	backend
+```
+
 ✔️ Communication never leaves Docker’s internal network
 
 2️⃣ Only the Frontend Is Exposed to the Host
@@ -129,6 +132,7 @@ here only frontned container has host port mapping , which  means only that is a
 <img width="1232" height="356" alt="image" src="https://github.com/user-attachments/assets/e196235d-69c3-4563-9c51-ab22ca91e529" />
 
 3️⃣ Backend & Database NOT Accessible Outside Docker Network
+
 when i try to access backend container from public ip, it fails. This minimizes the attack surface and exposes single public entry point.
 <img width="1498" height="751" alt="image" src="https://github.com/user-attachments/assets/4689c257-b024-44e0-8985-14bb128be602" />
 
@@ -171,6 +175,7 @@ Same pattern works in AWS (via ECS task definitions / Secrets Manager).
 4. Independent Builds
 Frontend and backend have their own Dockerfile
 Mirrors how services are deployed independently in production.
+
 
 
 
