@@ -57,7 +57,18 @@ Why Docker compose?
 
 For local env, we can use docker compose which helps run multiple containers as microservices and all are within one default private network created by docker compose
 
+-----------------------------------------------------------------------------------------------------------------------
+## High level overview
+PostgreSQL (with a persistent volume)
+Backend API (Node.js + Express) exposing:
+GET /healthcheck
+GET /message → returns "Hello World"
 
+Frontend (React) that:
+Calls /healthcheck
+Calls /message
+Displays results in the browser
+-------------------------------------------------------------------------------------------------------------------------
 
 #Database setup (postgres SQL DB)
 
@@ -144,8 +155,22 @@ docker compose down -v
 ```
 
 
+Key Design Decisions
+1. Service Networking
+Docker Compose automatically creates a shared network.
+Backend connects to PostgreSQL via db:5432 (service name as DNS).
 
+2. Persistent Database
+PostgreSQL data stored in a named volume (postgres_data)
+Data survives container restarts.
 
+3. Environment-Driven Configuration
+No hard-coded secrets in code.
+Same pattern works in AWS (via ECS task definitions / Secrets Manager).
+
+4. Independent Builds
+Frontend and backend have their own Dockerfile
+Mirrors how services are deployed independently in production.
 
 
 
