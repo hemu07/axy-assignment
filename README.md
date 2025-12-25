@@ -9,7 +9,7 @@ Amazon Linux 2 / Amazon Linux 2023
 Any Linux distribution that supports Docker
 
 - Docker Engine (Required)
-- steps to install
+steps to install
 ```
 sudo yum update -y
 sudo yum install docker -y
@@ -131,5 +131,6 @@ docker compose down
 
 To remove volumes (will delete DB data):
 docker compose down -v
+
 
 
