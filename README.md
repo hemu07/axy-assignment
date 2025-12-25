@@ -46,15 +46,19 @@ Ensure the following inbound ports are allowed on the host (EC2 Security Group):
 
 Port	Purpose
 8080	Frontend web application
+
 22	SSH access
 
 <img width="1505" height="81" alt="image" src="https://github.com/user-attachments/assets/61fe58ec-ecbf-4441-8ad3-db6cd862a497" />
 
 
 Why Docker compose?
+
 For local env, we can use docker compose which helps run multiple containers as microservices and all are within one default private network created by docker compose
 
+
 #Database setup (postgres SQL DB)
+
 PostgreSQL runs as a containerized service using a named Docker volume for persistent storage. The database does not expose any host ports and is only accessible to other services on the private Docker network
 
 Docker stores Postgres data at: /var/lib/docker/volumes/axy-postgres-data
@@ -67,6 +71,7 @@ volumes:
 
 <img width="771" height="213" alt="image" src="https://github.com/user-attachments/assets/46b71c10-f9d3-4737-82b4-203829c0f060" />
 
+
 #Backend setup (Node.js + Express)
 I have configured below two paths:
 ```
@@ -78,6 +83,7 @@ and for a simple test to connect to postgres db, i have used env variable file i
 backend container is only accessible from frontend container, as i havent configured public port mapping here as seen in below snapshot
 
 <img width="1898" height="302" alt="image" src="https://github.com/user-attachments/assets/4fbaae00-ba76-4758-94b2-58692912cd5e" />
+
 
 #Frontend setup (React)
 i have configured frontned to call backend for below two paths
@@ -98,7 +104,6 @@ Docker Compose automatically creates a private bridge network (e.g. axy_default)
 All services (frontend, backend, db) are attached to this network
 
 <img width="898" height="333" alt="image" src="https://github.com/user-attachments/assets/3de42fcd-e3f9-4190-b839-87093c79b8e5" />
-
 
 And containers communicate using service names:
 Service	Hostname used
@@ -134,6 +139,7 @@ docker compose down
 
 To remove volumes (will delete DB data):
 docker compose down -v
+
 
 
 
