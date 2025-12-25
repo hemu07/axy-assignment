@@ -43,6 +43,7 @@ docker compose version
 - Network / Firewall Requirements
 
 Ensure the following inbound ports are allowed on the host (EC2 Security Group):
+
 Port	Purpose
 8080	Frontend web application
 22	SSH access
@@ -133,6 +134,7 @@ docker compose down
 
 To remove volumes (will delete DB data):
 docker compose down -v
+
 
 
 
