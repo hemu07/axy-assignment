@@ -45,6 +45,7 @@ docker compose version
 Ensure the following inbound ports are allowed on the host (EC2 Security Group):
 
 Port	Purpose
+
 8080	Frontend web application
 
 22	SSH access
@@ -57,6 +58,7 @@ Why Docker compose?
 For local env, we can use docker compose which helps run multiple containers as microservices and all are within one default private network created by docker compose
 
 
+
 #Database setup (postgres SQL DB)
 
 PostgreSQL runs as a containerized service using a named Docker volume for persistent storage. The database does not expose any host ports and is only accessible to other services on the private Docker network
@@ -64,16 +66,12 @@ PostgreSQL runs as a containerized service using a named Docker volume for persi
 Docker stores Postgres data at: /var/lib/docker/volumes/axy-postgres-data
 this way even if container dies, data is persisted on host machine and can be reused when new container is spinned up
 
-```
-volumes:
-  postgres_data:
-```
-
 <img width="771" height="213" alt="image" src="https://github.com/user-attachments/assets/46b71c10-f9d3-4737-82b4-203829c0f060" />
 
 
 #Backend setup (Node.js + Express)
 I have configured below two paths:
+
 ```
 GET /healthcheck   → { "status": "ok" }
 GET /message       → { "message": "Hello World" }
@@ -97,6 +95,7 @@ Displays:
 ok
 Hello World
 ```
+
 
 1️⃣ All Services Communicate Over a Private Docker Network
 
@@ -135,10 +134,14 @@ To verify whether the application is working fine, hit the public ip of the serv
 <img width="1919" height="434" alt="image" src="https://github.com/user-attachments/assets/f8399c62-dc91-4b8a-86bb-bcbb3c3f55f0" />
 
 To stop the application:
+```
 docker compose down
+```
 
 To remove volumes (will delete DB data):
+```
 docker compose down -v
+```
 
 
 
