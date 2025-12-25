@@ -2,6 +2,18 @@
 
 #Part 1: Docker Compose Setup (40% of score)
 
+#High level overview:
+
+PostgreSQL (with a persistent volume)
+Backend API (Node.js + Express) exposing:
+GET /healthcheck
+GET /message → returns "Hello World"
+
+Frontend (React) that:
+Calls /healthcheck
+Calls /message
+Displays results in the browser
+
 📋 Prerequisites & Installation
 
 This application is designed to run on a Linux-based system (AWS EC2 Amazon Linux 2 / Amazon Linux 2023)
@@ -56,18 +68,6 @@ Why Docker compose?
 
 For local env, we can use docker compose which helps run multiple containers as microservices and all are within one default private network created by docker compose
 
------------------------------------------------------------------------------------------------------------------------
-## High level overview
-PostgreSQL (with a persistent volume)
-Backend API (Node.js + Express) exposing:
-GET /healthcheck
-GET /message → returns "Hello World"
-
-Frontend (React) that:
-Calls /healthcheck
-Calls /message
-Displays results in the browser
--------------------------------------------------------------------------------------------------------------------------
 
 #Database setup (postgres SQL DB)
 
@@ -175,6 +175,7 @@ Same pattern works in AWS (via ECS task definitions / Secrets Manager).
 4. Independent Builds
 Frontend and backend have their own Dockerfile
 Mirrors how services are deployed independently in production.
+
 
 
 
