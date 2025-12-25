@@ -5,14 +5,21 @@
 #High level overview:
 
 PostgreSQL (with a persistent volume)
+
 Backend API (Node.js + Express) exposing:
+
 GET /healthcheck
+
 GET /message → returns "Hello World"
 
 Frontend (React) that:
+
 Calls /healthcheck
+
 Calls /message
+
 Displays results in the browser
+
 
 📋 Prerequisites & Installation
 
@@ -175,6 +182,7 @@ Same pattern works in AWS (via ECS task definitions / Secrets Manager).
 4. Independent Builds
 Frontend and backend have their own Dockerfile
 Mirrors how services are deployed independently in production.
+
 
 
 
